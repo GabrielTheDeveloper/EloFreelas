@@ -1,7 +1,7 @@
 const User = require('../models/User'); 
 
 const registerUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, email, isProfissional } = req.body;
 
     try {
         if (!username || !password) {
@@ -15,7 +15,10 @@ const registerUser = async (req, res) => {
 
         const newUser = new User({
             username,
-            password, 
+            password,
+            email,
+            isProfissional: isProfissional || false,
+            isAdmin: false,
         });
 
         await newUser.save();
